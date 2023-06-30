@@ -1,0 +1,59 @@
+<section class="landing_section"
+    data-header-color="black"
+>
+    <div class="section_content">
+        <header class="section_header">
+            <h2>Model Y</h2>
+            <p>Concertar una prueba de conducción</p>
+        </header>
+
+        <footer class="section_footer">
+            <div class="footer_content">
+                <a class="left_btn" href="#">Explorar inventario</a>
+                <a class="right_btn" href="#">Pedido personalizado</a>
+            </div>
+            <a href="#" class="link">Disponible con Moves III</a>
+        </footer>
+    </div>
+
+    <div class="section_bg">
+        <img src="./../../public/model-y.avif" alt="modelo Y tesla">
+    </div>
+</section>
+
+<style lang="sass">
+    .landing_section
+        @apply relative h-screen w-full text-center overflow-hidden
+        @apply text-black bg-black 
+        .section_content
+            @apply z-30 relative
+            @apply h-full flex flex-col
+            .section_header
+                h2
+                    @apply pt-24 text-[40px] font-medium leading-[48px]
+                p
+                    @apply pt-2 text-sm underline underline-offset-2
+            .section_footer
+                @apply flex flex-col flex-grow justify-end items-center p-4 align-middle
+                .footer_content
+                    @apply flex gap-4 justify-center justify-end
+                    a
+                        @apply max-w-full px-14 py-2 rounded min-w-[280px]
+                        @apply text-sm font-medium 
+                        @apply delay-100 duration-500 ease-in-out
+                        &:hover
+                            @apply bg-black text-white
+                            @apply delay-100 duration-500 ease-in-out
+                    .left_btn
+                        @apply bg-gray-700 text-white
+                    .right_btn
+                        @apply bg-gray-100 text-gray-700
+                .link
+                    @apply text-xs 
+                    @apply underline underline-offset-4 mt-8
+
+        .section_bg
+            @apply absolute top-0 bottom-0 h-full z-10
+            img
+                @apply object-center object-cover h-screen w-screen
+</style>

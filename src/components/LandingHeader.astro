@@ -1,0 +1,112 @@
+---
+import Logo from "./Logo.astro"
+---
+
+<header class="landing_header"
+    id="landing_header"
+>
+
+    <Logo />
+
+    <nav class="center_nav header_nav">
+        <ul class="nav_items">
+            <li class="nav_item"><a href="#">Model S</a></li>
+            <li class="nav_item"><a href="#">Model 3</a></li>
+            <li class="nav_item"><a href="#">Model X</a></li>
+            <li class="nav_item"><a href="#">Model Y</a></li>
+            <li class="nav_item"><a href="#">Powerwall</a></li>
+            <li class="nav_item"><a href="#">Carga</a></li>
+        </ul>			
+    </nav>
+
+    <nav class="right_nav header_nav">
+        <ul class="nav_items">
+            <li class="nav_item"><a href="#">Soporte</a></li>
+            <li class="nav_item"><a href="#">Tienda</a></li>
+            <li class="nav_item"><a href="#">Cuenta</a></li>
+            <li class="nav_item"><a href="#">Menu</a></li>
+        </ul>			
+    </nav>
+
+    <div class="menu_backdrop" id="menu_backdrop"></div>
+    
+</header>
+
+<style lang="sass">
+    .landing_header
+        @apply px-4 z-40 fixed
+        // si es fixed ya es relativo
+        @apply h-[56px] top-0 w-full
+        @apply flex items-center justify-between
+        @apply text-sm font-medium text-current
+        @apply transition-colors duration-500 delay-100
+        .header_nav
+            .nav_items
+                @apply flex 
+                .nav_item
+                    @apply py-1 px-2
+                    a
+                        @apply mx-2
+        // .center_nav
+        .right_nav
+            @apply flex flex-grow basis-0 justify-end
+        
+        .menu_backdrop
+            @apply absolute
+            @apply bg-black/5 backdrop-blur-md rounded
+            @apply translate-x-[var(--left)] translate-y-[var(--top)] top-0 left-0
+            @apply w-[var(--width)] h-[var(--height)]
+            @apply transition-all duration-300 ease-in-out opacity-0 -z-10
+
+</style>
+
+<script> // MENU BACKDROP HOVER
+    const headerItems = document.querySelectorAll(".landing_header li")
+    const menuBackdrop = document.querySelector("#menu_backdrop")
+
+    headerItems.forEach((headerItem) => {
+        headerItem.addEventListener('mouseenter', (ev) => {
+            const { left, top, width, height } = ev.target.getBoundingClientRect()
+            menuBackdrop.style.setProperty("--left", `${left}px`)
+            menuBackdrop.style.setProperty("--top", `${top}px`)
+            menuBackdrop.style.setProperty("--width", `${width}px`)
+            menuBackdrop.style.setProperty("--height", `${height}px`)
+            menuBackdrop.style.opacity = '1'
+            menuBackdrop.style.visibility = 'visible'
+        })
+
+        headerItem.addEventListener('mouseleave', ({target}) => {
+            menuBackdrop.style.opacity = '0'
+            menuBackdrop.style.visibility = 'none'
+        })
+    })
+</script>
+
+<script> // HEADER COLOR CHANGER
+    const $header = document.querySelector('#landing_header') as HTMLElement
+    const $sections = document.querySelectorAll('.landing_section')
+
+    const observerOptions = {
+        root: null, // contenedor del elemento que queremos detectar
+        rootMargin: '0px', // margen de ejecución de la acción, en cuanto se vea el elemento
+        threshold: 0.9 // porcentaje de visibilidad
+    }
+
+    const observer = new IntersectionObserver ((entries) => {
+        entries.forEach(entry => {
+            const { isIntersecting } = entry
+            if (isIntersecting) {
+                const color = entry.target.getAttribute('data-header-color')
+                $header.style.color = color
+            }
+        })
+    }, observerOptions)
+
+    const changeColor = () => {
+        $sections.forEach(section => {
+            observer.observe(section)
+        });
+
+    }
+    changeColor()
+</script>

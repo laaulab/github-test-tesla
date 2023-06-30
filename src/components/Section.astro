@@ -1,0 +1,55 @@
+---
+const { color, title, subtitle } = Astro.props
+const textColor = `text-${color}` // ${textColor}, color es una var que está declarada arriba y declarandolo así conseguimos que el color sea el mismo que el del header
+---
+
+<section class="landing_section"
+    data-header-color={color}
+>
+    <div class="section_content">
+        <header class={`section_header ${textColor}`}> 
+            <h2>{title}</h2>
+            <p>{subtitle}</p>
+        </header>
+
+        <footer class={`section_footer_container ${textColor}`}>
+            <slot name="section_footer" />
+            <!-- <a href="#">Prueba de conducción</a> -->
+        </footer>
+    </div>
+
+    <div class="section_bg_container">
+        <slot name="background" />
+        <!-- <video autoplay muted loop src="/video.webm"></video> -->
+    </div>
+</section>
+
+<style lang="sass">
+    .landing_section
+        @apply relative h-screen w-full text-center overflow-hidden
+        @apply bg-black 
+        .section_content
+            @apply z-30 relative
+            @apply h-full flex flex-col
+            .section_header
+                h2
+                    @apply pt-24 text-[40px] font-medium leading-[48px]
+                p
+                    @apply pt-2 text-sm
+            .section_footer_container
+                @apply flex flex-col flex-grow justify-end items-center p-20
+            //     .section_footer
+            //         @apply w-fit px-12 py-2 rounded
+            //         @apply text-sm font-medium
+            //         @apply border-2 border-white backdrop-blur-sm
+            //         @apply delay-100 duration-500 ease-in-out
+            //         &:hover
+            //             @apply bg-white text-gray-900 
+            //             @apply delay-100 duration-500 ease-in-out
+
+        .section_bg_container
+            @apply absolute top-0 bottom-0 h-full z-10
+            // video
+            //     @apply object-center object-cover h-screen w-screen
+</style>
+

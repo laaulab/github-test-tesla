@@ -1,0 +1,80 @@
+---
+import Layout from "../layouts/Layout.astro";
+import "../../assets/styles/styles.sass"
+import LandingHeader from "../components/LandingHeader.astro";
+import HeroSection from "../components/HeroSection.astro";
+import ModelYSection from "../components/ModelYSection.astro";
+import Section from "../components/Section.astro";
+---
+
+<Layout title="Clon Tesla landing page">
+	<LandingHeader />
+
+	<main class="main">
+		<div class="hero_container">
+			<HeroSection />
+		</div>
+		<div class="hero_container">
+			<ModelYSection />
+		</div>
+
+		<div class="hero_container">
+			<Section
+				color = 'white'
+				title = 'Disfrute de Tesla'
+				subtitle = 'Programe una prueba de conducción hoy mismo'
+				>	
+				<div slot="section_footer" class="section_footer">
+					<a href="#">Prueba de conducción</a>
+				</div>
+				<video slot="background"
+					class="section_bg"
+					autoplay 
+					muted 
+					loop 
+					src="/video.webm">
+				</video> 
+			<Section/> 
+		</a>
+
+		<div class="hero_container">
+			<Section
+			color = 'white'
+			title = 'Model Y'
+			subtitle = 'Concertar una prueba de conducción'
+		/> 
+		</div>
+		<div class="hero_container">
+			<Section
+			color = 'white'
+			title = 'Model 3'
+			subtitle = 'Programe una prueba de conducción hoy mismo'
+		/> 
+		</div>
+	</main>
+
+</Layout>
+
+<style lang="sass">
+	.main
+		@apply relative w-full h-screen overflow-auto
+		// con overflow-auto scrolleamos el contenedor
+		@apply snap-y snap-mandatory
+		.hero_container
+			@apply snap-center
+
+	.section_footer
+		@apply flex flex-col flex-grow justify-end items-center p-4
+		a
+			@apply w-fit px-12 py-2 rounded
+			@apply text-sm font-medium
+			@apply border-2 border-white backdrop-blur-sm
+			@apply delay-100 duration-500 ease-in-out
+			&:hover
+				@apply bg-white text-gray-900 
+				@apply delay-100 duration-500 ease-in-out
+
+	.section_bg
+		@apply object-center object-cover h-screen w-screen
+
+</style>
