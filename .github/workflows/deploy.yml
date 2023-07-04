@@ -22,5 +22,5 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.2
         with:
-          branch: gh-pages
+          branch: main
           folder: dist  # Cambia 'dist' si el directorio de compilación de Astro es diferente
